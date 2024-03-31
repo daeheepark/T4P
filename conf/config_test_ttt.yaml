@@ -1,0 +1,90 @@
+defaults:
+  - hydra: default
+  - datamodule: lyft_lyftsample
+  - model: model_ttt
+
+seed: 1234
+monitor: val/loss     
+save_top_k: 10
+
+data_root:
+checkpoint: 
+pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-26/16-35-23_Nofurmae_tr_nus_vl_nus/checkpoints/epoch=23.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-26/15-29-12_Nofurmae_tr_nus_vl_nus/checkpoints/epoch=25.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-09-21/18-23-05_tr_nus_val_nus/checkpoints/epoch=33.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-09-22/15-47-52_tr_lyft_val_lyftsample/checkpoints/epoch=55.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-03/16-31-05_tr_way_val_way/checkpoints/epoch=49.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-04/16-06-29_tr_inter_vl_inter_13/checkpoints/epoch=50.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-04/23-09-25_tr_lyft_vl_lyftsample_13/checkpoints/epoch=11.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-16/21-07-25_tr_nus_vl_nus_13/checkpoints/epoch=34.ckpt
+# pretrained_weights: outputs/forecast-mae-ttt-test_False/2023-10-17/19-50-14_tr_way03_vl_way001_13/checkpoints/epoch=21.ckpt
+output: ${model.name}-${model.phase}
+
+# trainer
+num_workers: 4
+gpus: 1
+sync_bn: true
+batch_size: 1
+epochs: 60
+warmup_epochs: 10
+
+# optimizer
+# lr: 0.01
+# weight_decay: 1e-3
+# lr2: 0.5
+# weight_decay2: 1e-3
+# gradient_clip_val: 15
+lr: 0.0001
+weight_decay: 1e-3
+lr2: 0.01
+weight_decay2: 1e-3
+gradient_clip_val: 15
+gradient_clip_algorithm: norm
+blacklist: [
+            
+            ]
+whitelist: [
+            Embedding,
+            Linear,
+            Conv1d,
+            Conv2d,
+            Conv3d,
+            MultiheadAttention,
+            LSTM,
+            GRU,
+            BatchNorm1d,
+            BatchNorm2d,
+            BatchNorm3d,
+            SyncBatchNorm,
+            LayerNorm,
+            ]
+update_param: True
+
+fr_embedding: False
+fr_first_layer: False
+fr_enc_layer: False
+fr_dec_layer: False
+fr_last_fore: False
+fr_last_mae: False
+
+sep_ego: False
+update_type_embed: False
+
+limit_train_batches:
+limit_val_batches:
+limit_test_batches:
+log_model: all
+test: true
+# ttt_frequency: 30
+ttt_frequency: 12
+ttt_real_freq: 1
+
+log_frequency: 50
+
+wandb: disable
+
+desc: Ours_obs_tr_way_val_lyftsample_wo_actor_spec
+# desc: Ours_obs_tr_inter_val_nus_13_noupdate_viz_multimodal
+# desc: Ours_obs_tr_inter_val_nus_13_vizall_target
+# desc: Ours_obs_tr_nus_val_lyftsample_viz
+# desc: debug

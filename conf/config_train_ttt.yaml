@@ -1,0 +1,43 @@
+defaults:
+  - hydra: default
+  - datamodule: nus
+  - model: model_ttt
+
+seed: 1234
+monitor: val_minADE6   
+save_top_k: 10
+
+data_root:
+checkpoint: 
+pretrained_weights: 
+output: ${model.name}-${model.phase}
+
+# trainer
+num_workers: 32
+gpus: 1
+sync_bn: true
+batch_size: 128
+epochs: 60
+warmup_epochs: 10
+
+# optimizer
+lr: 0.001
+weight_decay: 1e-4
+lr2: 0.001
+weight_decay2: 1e-4
+gradient_clip_val: 5
+gradient_clip_algorithm: norm
+
+limit_train_batches: 1
+limit_val_batches: 3
+limit_test_batches:
+log_model: all
+test: false
+
+log_frequency: 50
+
+wandb: disable
+
+# desc: NLL_tr_nus_vl_nus
+# desc: NLL_13_tr_inter_vl_inter
+desc: debug

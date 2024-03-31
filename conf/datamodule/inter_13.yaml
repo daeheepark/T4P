@@ -1,0 +1,31 @@
+_target_: datamodule.trajdata_datamodule.TrajdataDataModule
+
+train_args:
+  - data: [interaction_multi-train, interaction_single-train]
+  - data_dir: {'interaction_multi': 'datasets/interaction_multi', 'interaction_single': 'datasets/interaction_single'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: False
+  - bs: ${batch_size}
+val_args:
+  - data: [interaction_multi-val, interaction_single-val]
+  - data_dir: {'interaction_multi': 'datasets/interaction_multi', 'interaction_single': 'datasets/interaction_single'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: False
+  - bs: ${batch_size}
+test_args:
+  - data: [interaction_multi-val, interaction_single-val]
+  - data_dir: {'interaction_multi': 'datasets/interaction_multi', 'interaction_single': 'datasets/interaction_single'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: False
+  - bs: ${batch_size}
+shuffle: True
+augmentations: null
+num_workers: ${num_workers}
+pin_memory: True
+test: ${test}

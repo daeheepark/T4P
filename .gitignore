@@ -1,0 +1,6 @@
+**.pyc
+tmp*
+.vscode
+datasets
+outputs
+unified-av-data-loader

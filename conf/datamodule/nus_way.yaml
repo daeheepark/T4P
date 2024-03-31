@@ -1,0 +1,31 @@
+_target_: datamodule.trajdata_datamodule.TrajdataDataModule
+
+train_args:
+  - data: [nusc_trainval-train]
+  - data_dir: {'nusc_trainval': 'datasets/nuScenes'}
+  - dt: 0.5
+  - history: [2., 2.]
+  - future: [6., 6.]
+  - ego_only: True
+  - bs: ${batch_size}
+val_args:
+  - data: [waymo_val]
+  - data_dir: {'waymo_val': 'datasets/waymo'}
+  - dt: 0.5
+  - history: [2., 2.]
+  - future: [6., 6.]
+  - ego_only: True
+  - bs: ${batch_size}
+test_args:
+  - data: [waymo_val]
+  - data_dir: {'waymo_val': 'datasets/waymo'}
+  - dt: 0.5
+  - history: [2., 2.]
+  - future: [6., 6.]
+  - ego_only: True
+  - bs: ${batch_size}
+shuffle: True
+augmentations: null
+num_workers: ${num_workers}
+pin_memory: True
+test: ${test}

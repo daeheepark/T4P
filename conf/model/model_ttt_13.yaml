@@ -1,0 +1,25 @@
+name: forecast-mae
+phase: ttt-test_${test}
+
+target:
+  _target_: model.trainer_ttt_peragent.Trainer
+  dim: 128
+  historical_steps: 10
+  future_steps: 30
+  encoder_depth: 4
+  decoder_depth: 4
+  num_heads: 8
+  mlp_ratio: 4.0
+  qkv_bias: False
+  drop_path: 0.2
+  actor_mask_ratio: 0.3
+  lane_mask_ratio: 0.1
+  loss_weight: [1., 1.]
+  forecast_loss_weight: [1., 1., 1.]
+  mae_loss_weight: [1.0, 1.0, 0.35]
+  lr: ${lr}
+  weight_decay: ${weight_decay}
+  lr2: ${lr2}
+  weight_decay2: ${weight_decay2}
+  epochs: ${epochs}
+  warmup_epochs: ${warmup_epochs}

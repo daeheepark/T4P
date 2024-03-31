@@ -1,0 +1,31 @@
+_target_: datamodule.trajdata_datamodule.TrajdataDataModule
+
+train_args:
+  - data: [lyft_train]
+  - data_dir: {'lyft_train': 'datasets/lyft/scenes/train.zarr'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+val_args:
+  - data: [lyft_sample]
+  - data_dir: {'lyft_sample': 'datasets/lyft/scenes/sample.zarr'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+test_args:
+  - data: [lyft_sample]
+  - data_dir: {'lyft_sample': 'datasets/lyft/scenes/sample.zarr'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+shuffle: True
+augmentations: null
+num_workers: ${num_workers}
+pin_memory: True
+test: ${test}

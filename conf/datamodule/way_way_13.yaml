@@ -1,0 +1,31 @@
+_target_: datamodule.trajdata_datamodule.TrajdataDataModule
+
+train_args:
+  - data: [waymo_train]
+  - data_dir: {'waymo_train': 'datasets/waymo'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+val_args:
+  - data: [waymo_val]
+  - data_dir: {'waymo_val': 'datasets/waymo'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+test_args:
+  - data: [waymo_val]
+  - data_dir: {'waymo_val': 'datasets/waymo'}
+  - dt: 0.1
+  - history: [0.9, 0.9]
+  - future: [3., 3.]
+  - ego_only: True
+  - bs: ${batch_size}
+shuffle: True
+augmentations: null
+num_workers: ${num_workers}
+pin_memory: True
+test: ${test}
