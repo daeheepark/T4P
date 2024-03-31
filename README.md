@@ -35,6 +35,15 @@ git clone https://github.com/daeheepark/trajdata-t4p unified-av-data-loader
 └── train_ttt.py
 ```
 
+## Preprocess datasets
+TBD
+
+## Train `ForecastMAE`
+TBD
+
+## Test-time train and online evaluation
+TBD
+
 ## Acknowledgements
 This repo is mostly built on top of [ForecastMAE](https://arxiv.org/pdf/2308.09882.pdf) and [trajdata](https://arxiv.org/pdf/2307.13924.pdf).
 Thanks for their great works.
